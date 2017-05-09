@@ -27,8 +27,10 @@ def main():
     out_string = rotate(in_string)
     print("After rotating:")
     print(out_string)
-
-
+    print("We can convert it back by rotating 13 again...")
+    out_string = rotate(out_string)
+    print("After rotating a second time:")
+    print(out_string)
 
 
 if __name__ == "__main__":
