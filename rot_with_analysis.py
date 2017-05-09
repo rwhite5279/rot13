@@ -66,7 +66,7 @@ def main():
     
     print("Identifying likely decryptions with a 26-space vector")
     # in_string = "a'e kladd zsnafy kgew vaxxaumdlq ywllafy lzak lzafy lg jwugyfarw lzw lwpl zwjw, tml a lzafc al'k bmkl twusmkw a vgf'l zsnw s jwsddq, jwsddq, jwsddq jwhjwkwflslanw ksehdw gx ojalafy. a ewsf, a'e fgl vgafy sfq cafv gx 'imauc tjgof xgp bmehwv gnwj lzw dsrq vgy' cafv gx lzafy zwjw, al'k bmkl kgew ogjvk. "
-    in_string = "a'e kladd zsnafy kgew vaxxaumdlq ywllafy lzak lzafy lg jwugyfarw lzw lwpl zwjw, tml a lzafc al'k bmkl twusmkw a vgf'l zsnw s jwsddq, jwsddq, jwsddq jwhjwkwflslanw ksehdw gx ojalafy."
+    in_string = "fapmk ue odmus rxqfotqd'e nudftpmk"
     minimum_percentage = 1.00
     for rotate_value in range(26):
         out_string = rotate(in_string, rotate_value) 

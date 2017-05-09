@@ -23,7 +23,7 @@ def main():
     print("ROT-NN Demonstration")
     for rotate_value in range(26):
         # in_string = "Now is the time for all good men (and women) to come to the aid of their country".lower()
-        in_string = "I'm still having some difficulty getting this thing to recognize the text here, but I think it's just because I don't have a really, really, REALLY representative sample of writing. I mean, I'm not doing any kind of 'quick brown fox jumped over the lazy dog' kind of thing here, it's just some words. But still, I hope a few lines will be enough to make it work. Keep your fingers crossed!"
+        in_string = "Today is Craig Fletcher's birthday"
         '''
         print("The input string is: \n" + in_string)
         print("... and the rotate_value is", rotate_value)
