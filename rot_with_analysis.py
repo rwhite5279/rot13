@@ -8,7 +8,6 @@ then uses frequency analysis to determine which rotation is most likely the corr
 """
 
 import math
-import operator
 
 def get_frequencies(string):
     """Returns a dictionary of letters for the string, with accompanying 
@@ -36,12 +35,22 @@ def rotate(in_string, n):
     out_string = ""
     for letter in in_string.lower():
         if 97 <= ord(letter) and ord(letter) <= 122: # lowercase letters
+            '''Take ASCII value for character and subtract 97 to get
+            A = 0, B = 1, C = 2, etc... Add the amount of rotation n,
+            take the mod 26 to wrap around if necessary, then add 97
+            to get a new ASCII value, and chr to convert back to the
+            new letter. Whew!
+            '''
             out_string += chr((((ord(letter) - 97) + n) % 26) + 97)
         else:
             out_string += letter    # Non-letter
     return out_string
 
 def calculate_distance(frequencies1, frequencies2):
+    """For each list of frequencies for a permutation, calculate the
+    square root of the sum of squares for the distances of those 26
+    values.
+    """
     sum_of_squares = 0
     for i in range(len(frequencies2)):  # don't want to go beyond letters
         # print("Checking",frequencies2[i][0],":")
@@ -49,7 +58,12 @@ def calculate_distance(frequencies1, frequencies2):
         sum_of_squares += (abs(frequencies1[i][1] - frequencies2[i][1]))**2
     return math.sqrt(sum_of_squares)
 
-def main():
+def initialize_english_frequencies():
+    """Initializes a set of frequencies for English letters based on
+    an analysis of the text of Alice in Wonderland. Each entry in 
+    the frequencies list is a tuple with the first value the character,
+    and the second value the relative frequency of occurence.
+    """
     frequencies = [('a',0.08163018952021023),('b',0.013696340523525205),
     ('c',0.022266999712144707), ('d',0.04577827713964696),
     ('e',0.12602490412561634),('f',0.018571309184440957),
@@ -63,11 +77,19 @@ def main():
     ('u',0.03217479316204396), ('v',0.007855663785018525),
     ('w',0.024848411688782),('x',0.0013742768796486309), 
     ('y',0.021004150687602724),('z',0.0007242810581931973)]
-    
+    return frequencies 
+ 
+def main():
+    frequencies = initialize_english_frequencies() 
     print("Identifying likely decryptions with a 26-space vector")
-    # in_string = "a'e kladd zsnafy kgew vaxxaumdlq ywllafy lzak lzafy lg jwugyfarw lzw lwpl zwjw, tml a lzafc al'k bmkl twusmkw a vgf'l zsnw s jwsddq, jwsddq, jwsddq jwhjwkwflslanw ksehdw gx ojalafy. a ewsf, a'e fgl vgafy sfq cafv gx 'imauc tjgof xgp bmehwv gnwj lzw dsrq vgy' cafv gx lzafy zwjw, al'k bmkl kgew ogjvk. "
-    in_string = "fapmk ue odmus rxqfotqd'e nudftpmk"
-    minimum_percentage = 1.00
+    in_string = "sghr hr z cdlnmrsqzshnm ne sgd bzdrzq bhogdq zmc gnv dzrx hs hr sn bqzbj sgd dmbqxoshnm. vhkk sgd bnlotsdq ad zakd sn zmzkxyd kdssdq eqdptdmbhdr rtbbdrretkkx? nmd ne sgd qdzk bgzkkdmfdr ne z szrj khjd sghr hr sgd ezbs sgzs z rgnqsdq vqhshmf rzlokd lzx mns zkknv enq sgd eqdptdmbhdr sn qdrnkud sgdlrdkudr hmsn sgd dwodbsdc odqbdmszfdr. ezkrd onrhshudr zqd bdqszhmkx z onrrhahkhsx!"
+    print("Attempting to decrypt this passage:")
+    print(in_string)
+    print("""Press [Enter] repeatedly to cycle through the possible 
+translations and their corresponding distance values.""")
+    # We'll be looking for a minimum distance between possible decryptions,
+    # so start with 1 and key off smaller distances as we go.
+    minimum_percentage = 1
     for rotate_value in range(26):
         out_string = rotate(in_string, rotate_value) 
         rot_frequencies = get_frequencies(out_string)
@@ -75,11 +97,13 @@ def main():
         # between the frequencies in our test data and the frequencies 
         # in our sample data.
         dist = calculate_distance(frequencies, rot_frequencies)
+        print("Translation:", out_string)
+        print("Distance:", dist)
         if dist < minimum_percentage:
             minimum_percentage = dist 
-            print("Checking", out_string)
-            print("With a score of",minimum_percentage,"this is the best guess so far.")
-            input()
+            print("Best decryption so far!")
+        input()
+    print("Finished")
 
 if __name__ == "__main__":
     main()

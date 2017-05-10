@@ -22,8 +22,7 @@ def rotate(in_string, n):
 def main():
     print("ROT-NN Demonstration")
     for rotate_value in range(26):
-        # in_string = "Now is the time for all good men (and women) to come to the aid of their country".lower()
-        in_string = "Today is Craig Fletcher's birthday"
+        in_string = "this is a demonstration of the Caesar cipher and how easy it is to crack the encryption. will the computer be able to analyze letter frequencies successfully? One of the real challenges of a task like this is the fact that a shorter writing sample may not allow for the frequencies to resolve themselves into the expected percentages. False positives are certainly a possibility!"
         '''
         print("The input string is: \n" + in_string)
         print("... and the rotate_value is", rotate_value)
