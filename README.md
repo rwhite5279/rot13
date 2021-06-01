@@ -49,11 +49,13 @@ FURTHER INFORMATION:
 A "Caesar Cipher" is a cipher based on a rotation of the alphabet, and a
 ROT-13 cipher is based on a rotation of 13 spaces. Thus:
 
-Plaintext: a b c d e f g h i j k l m n o p q r s t u v w x y z
-ROT-13   : n o p q r s t u v w x y z a b c d e f g h i j k l m
+    Plaintext: a b c d e f g h i j k l m n o p q r s t u v w x y z
+    ROT-13   : n o p q r s t u v w x y z a b c d e f g h i j k l m
 
-ROT-13 is the easiest Caesar cipher to work with. Instead of always 
-rotating 13 spaces, it is possible to rotate an arbitrary number of spaces,
+ROT-13 is perhaps the easiest rotation to work with, because rotation
+can be performed either "forwards" or "backwards" through the 26-character
+English alphabet with the same result. Instead of always rotating 13
+spaces, however, it is possible to rotate an arbitrary number of spaces,
 and this is what the ROTNN.py file allows for.
 
 The English language letter frequencies used in this project may be a

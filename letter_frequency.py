@@ -5,6 +5,9 @@ Takes the AliceInWonderland.txt file and does a letter freqency
 analysis on it.
 """
 
+__author__ = "Richard White"
+__version__ = "2021-06-01"
+
 import operator     # used to sort dictionary by value
 
 def main():
@@ -28,11 +31,6 @@ def main():
     # Reveal results
     for key in sorted(letters.keys()):
         print("('" + key + "':" + str(letters[key]) + ")")
-
-
-
-
-
 
 if __name__ == "__main__":
     main()

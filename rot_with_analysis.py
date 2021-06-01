@@ -3,19 +3,20 @@
 rot_with_analysis.py
 This program produces a series of ROT-NN rotation results on text and 
 then uses frequency analysis to determine which rotation is most likely the correct one.
-@author Richard White
-@version 2017-05-09
 """
+
+__author__ = "Richard White"
+__version__= "2020-06-01"
 
 import math
 
 def get_frequencies(string):
-    """Returns a dictionary of letters for the string, with accompanying 
-    frequencies, in alphabetic order
+    """Returns a list of tuples, with letters and accompanying 
+    frequencies, in alphabetic order.
     """
-    letters = {}
-    letterfreqs = []
-    letter_count = 0
+    letters = {}            # Dictionary to collect letter frequencies
+    letterfreqs = []        # Returns final result
+    letter_count = 0        # Counts character values (not spaces, etc)
     for letter in string:
         if 97 <= ord(letter) and ord(letter) <= 122:
             letter_count += 1
@@ -49,12 +50,14 @@ def rotate(in_string, n):
 def calculate_distance(frequencies1, frequencies2):
     """For each list of frequencies for a permutation, calculate the
     square root of the sum of squares for the distances of those 26
-    values.
+    values. We are calculating the "standard deviation" of one set of
+    frequencies from the other set of frequencies. The smallest distance
+    will be the for the frequencies which most closely match.
+    In our context, that will be the plaintext solution with letter
+    frequencies that most closely match English frequencies.
     """
     sum_of_squares = 0
     for i in range(len(frequencies2)):  # don't want to go beyond letters
-        # print("Checking",frequencies2[i][0],":")
-        # print(abs(frequencies1[i][1] - frequencies2[i][1]))
         sum_of_squares += (abs(frequencies1[i][1] - frequencies2[i][1]))**2
     return math.sqrt(sum_of_squares)
 
@@ -64,7 +67,8 @@ def initialize_english_frequencies():
     the frequencies list is a tuple with the first value the character,
     and the second value the relative frequency of occurence.
     """
-    frequencies = [('a',0.08163018952021023),('b',0.013696340523525205),
+    frequencies = \
+    [('a',0.08163018952021023),('b',0.013696340523525205),
     ('c',0.022266999712144707), ('d',0.04577827713964696),
     ('e',0.12602490412561634),('f',0.018571309184440957),
     ('g',0.02350199177291003),('h',0.06847241696303381),
@@ -85,8 +89,6 @@ def main():
     in_string = "sghr hr z cdlnmrsqzshnm ne sgd bzdrzq bhogdq zmc gnv dzrx hs hr sn bqzbj sgd dmbqxoshnm. vhkk sgd bnlotsdq ad zakd sn zmzkxyd kdssdq eqdptdmbhdr rtbbdrretkkx? nmd ne sgd qdzk bgzkkdmfdr ne z szrj khjd sghr hr sgd ezbs sgzs z rgnqsdq vqhshmf rzlokd lzx mns zkknv enq sgd eqdptdmbhdr sn qdrnkud sgdlrdkudr hmsn sgd dwodbsdc odqbdmszfdr. ezkrd onrhshudr zqd bdqszhmkx z onrrhahkhsx!"
     print("Attempting to decrypt this passage:")
     print(in_string)
-    print("""Press [Enter] repeatedly to cycle through the possible 
-translations and their corresponding distance values.""")
     # We'll be looking for a minimum distance between possible decryptions,
     # so start with 1 and key off smaller distances as we go.
     minimum_percentage = 1
@@ -102,7 +104,6 @@ translations and their corresponding distance values.""")
         if dist < minimum_percentage:
             minimum_percentage = dist 
             print("Best decryption so far!")
-        input()
     print("Finished")
 
 if __name__ == "__main__":

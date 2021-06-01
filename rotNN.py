@@ -3,9 +3,10 @@
 rotNN.py
 This program produces a ROT-NN rotation on text by rotating it forwards
 or backwards a specified number of letters to encode/decode it.
-@author Richard White
-@version 2017-05-09
 """
+
+__author__ = "Richard White"
+__version__ = "2021-06-01"
 
 def rotate(in_string, n):
     """Takes an input string and rotates it n letters in the English
@@ -30,6 +31,7 @@ def main():
         out_string = rotate(in_string, rotate_value)
         # print("After rotating:")
         print(rotate_value, out_string)
+        print()
         '''
         print("We can convert it back by rotating n backwards...")
         out_string = rotate(out_string, -rotate_value)
