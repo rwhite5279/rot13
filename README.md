@@ -62,6 +62,6 @@ The English language letter frequencies used in this project may be a
 bit off from the standard frequencies. The ones in this project were 
 created using the complete text of *Alice in Wonderland* (included here
 as a text file) and the program letter_frequency.py, included here as
-a reference.
+a reference. You can run the letter_frequency.py program with other text files to see how the frequencies you measure compare.
 
 
